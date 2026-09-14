@@ -1,0 +1,21 @@
+type Employee {
+    id: ID!
+    dept: String!
+    name: String!
+    salary: Int!
+}
+
+type AiResponse {
+    title: String!
+    description: String!
+    year: Int!
+}
+
+type Query {
+    getAllEmployee: [Employee!]!
+    findById(id: ID!): Employee
+}
+
+type Mutation {
+    aiChat(prompt: String!, conversationId: String!): AiResponse!
+}

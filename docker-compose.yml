@@ -1,0 +1,21 @@
+services:
+  app:
+    image: graph-ql-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: graph-ql-app
+    ports:
+      - "9090:9090"
+    environment:
+      # Database connection targeting host Mac PostgreSQL
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://host.docker.internal:5432/postgres"
+      SPRING_DATASOURCE_USERNAME: "${DB_USERNAME}"
+      SPRING_DATASOURCE_PASSWORD: "${DB_PASSWORD}"
+
+      # Spring AI Google GenAI configuration
+      SPRING_AI_GOOGLE_GENAI_API_KEY: "${GEMINI_API_KEY}"
+
+    extra_hosts:
+      # Ensures Linux/macOS Docker resolves host.docker.internal reliably
+      - "host.docker.internal:host-gateway"
